@@ -1,5 +1,5 @@
 # desktop-web-scraper
-The ultimate goal is to create an open source GUI desktop web-scraper, i.e. program which pull any desirable data from the Web and present it in desirable format.
+The ultimate goal is to create an open source GUI desktop web-scraper, i.e. program which pulls any desirable data from the Web and present it in desirable format.
 Now the project is on a pre-test stage. The goal is to test how a simple one-variable scraping algorythm written in Python will behave in Windows x86 and Windows x64 compatible builds.
 ## For users
 I have build a small app which answers any questions: Answerer. You can find respective builds for your system (Windows only, sorry):
