@@ -61,7 +61,7 @@ class MyApp(QWidget):
         self.resize(500, 100)
         self.setMinimumSize(self.sizeHint())
         self.center()
-        self.setWindowTitle('VK Searcher alpha 0.0.1')
+        self.setWindowTitle('ВК Пошук 0.0.1')
         self.setWindowIcon(QIcon('img/in-ico.ico'))
         self.show()
 
@@ -149,9 +149,11 @@ class MyApp(QWidget):
                 self.tableView.setItem(i, 6, it6)
             self.setMinimumSize(self.sizeHint())
             self.buttonSave.show()
+            return res
 
         else:
             self.answer.setText("Введіть запит для пошуку")
+
 
     def handleSave(self):
         filename=QFileDialog.getSaveFileName(self, 'Зберегти',
@@ -165,16 +167,15 @@ class MyApp(QWidget):
             f.write_row(0, 0,["Дата і час", "Текст", "Коментарі", 'Подобається',
                         'Поширення', 'Посилання'])
             date3 = []
-            text1 = []
             comments1 = []
             likes1 = []
             reposts1 = []
             url2 = []
-            enddate = int(self.enddate.text())
-            startdate = int(self.startdate.text())
-            for item in vksearch(self.questionEdit.text(),enddate,startdate):
+            row = 1
+            for item in self.getResult():
                 date3.append(datetime.fromtimestamp(item['date']))
-                text1.append(item['text'])
+                f.write_string(row, 1, item['text'])
+                row += 1
                 comments1.append(item['comments']['count'])
                 likes1.append(item['likes']['count'])
                 reposts1.append(item['reposts']['count'])
@@ -191,7 +192,6 @@ class MyApp(QWidget):
                                                 'font_size':16, 'bg_color':'silver'})
             f.set_row(0, None, format_first)
             f.write_column('A2', date3, format_date)
-            f.write_column('B2', text1)
             f.write_column('C2', comments1)
             f.write_column('D2', likes1)
             f.write_column('E2', reposts1)
